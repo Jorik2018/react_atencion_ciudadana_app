@@ -63,31 +63,10 @@ function MainDisabledExample() {
         if (header && paper) {
             paper.style.height = (height - header.offsetHeight) + 'px';
         }
-        /*const [body, toolBar] = formRef.current.children;
-        const nav = document.querySelector('nav');
-        body.style.height = (height - header.offsetHeight - toolBar.offsetHeight) + 'px';
-        toolBar.style.width = (width - nav.offsetWidth) + 'px';*/
-        //}
+
     }, [width, height]);
 
     const onSubmit = data => console.log(data);
-
-    // function onChangeBirthdate(v) {
-    // 	if (v) {
-    // 		if (v.toDate) v = v.toDate();
-    // 	}
-    // 	console.log(v);
-
-    // 	set(o => ({ ...o, fecha: v }));
-    // 	/*var age=o.age;
-    // 	if(v){
-    // 	  if(!v.diff)v=dayjs(v);
-    // 	  age=-v.diff(new Date(),'year');
-    // 	}
-    // 	set(o => ({...o,birthdate: v,age:age}),()=>{
-    // 	  console.log('after set');
-    // 	});*/
-    // }
 
     const onClickTime = (e: any) => {
         console.log(e.target.textContent);
@@ -300,7 +279,7 @@ function MainDisabledExample() {
                                                         </Typography>
                                                     </CardContent>
                                                 </CardActionArea>
-                                                <CardActions>
+                                                <CardActions className='pl-6'>
                                                     <Button className='hover-white' variant="contained" color="success" href='http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php' target={'_blank'} startIcon={<SendIcon />}>
                                                         INGRESAR
                                                     </Button>
@@ -326,7 +305,7 @@ function MainDisabledExample() {
                                                         </Typography>
                                                     </CardContent>
                                                 </CardActionArea>
-                                                <CardActions>
+                                                <CardActions className='pl-6'>
                                                     <Button className='hover-white' variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/register"}>
                                                         INGRESAR
                                                     </Button>
@@ -347,12 +326,11 @@ function MainDisabledExample() {
                                                             Paso Nº 03
                                                         </Typography>
                                                         <Typography variant="body2" color="text.secondary" textAlign={'justify'}>
-                                                            ¿No recuerdas el dia y la hora de su cita?<br /><br />Búscalo Aquí.
-                                                            
+                                                            ¿No recuerdas el dia y la hora de su cita?<br /><br />Búscalo Aquí con tu número de documento.
                                                         </Typography>
                                                     </CardContent>
                                                 </CardActionArea>
-                                                <CardActions>
+                                                <CardActions className='pl-6'>
                                                     <Button className='hover-white' variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/search"}>
                                                         INGRESAR
                                                     </Button>
@@ -361,7 +339,6 @@ function MainDisabledExample() {
                                         </Grid>
 
                                     </Grid>
-
                                 </Typography>
                             </CardContent>
                         </Card>

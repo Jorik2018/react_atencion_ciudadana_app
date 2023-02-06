@@ -79,6 +79,16 @@
   border-bottom: 2px solid #fff;
 }
 
-.hover-white:hover{
+.hover-white:hover {
   color: white;
+}
+
+.table-gore {
+  line-height: 15px !important;
+  padding: 10px !important;
+  border: 2px solid #fff;
+}
+
+.pl-6{
+  padding-left: 6em !important;
 }

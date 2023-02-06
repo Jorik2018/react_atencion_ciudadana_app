@@ -73,29 +73,12 @@ function FormDisabledExample() {
 
 	const onSubmit = data => console.log(data);
 
-	// function onChangeBirthdate(v) {
-	// 	if (v) {
-	// 		if (v.toDate) v = v.toDate();
-	// 	}
-	// 	console.log(v);
-
-	// 	set(o => ({ ...o, fecha: v }));
-	// 	/*var age=o.age;
-	// 	if(v){
-	// 	  if(!v.diff)v=dayjs(v);
-	// 	  age=-v.diff(new Date(),'year');
-	// 	}
-	// 	set(o => ({...o,birthdate: v,age:age}),()=>{
-	// 	  console.log('after set');
-	// 	});*/
-	// }
-
 	const onClickTime = (e: any) => {
 		console.log(e.target.textContent);
 		var v = e.target.textContent;
 		set(o => ({ ...o, horaini: v }));
 	}
-	
+
 	const onClickCambiarHora = (e: any) => {
 		set(o => ({ ...o, horaini: '' }));
 	}
@@ -118,6 +101,27 @@ function FormDisabledExample() {
 				});
 			}
 		}
+
+		if (o.tipoDocumento == 'RUC' && o.tipoPersona == 'Persona Jurídica') {
+			if (o.nroDocumento.length == 11) {
+				http.get('http://localhost:8080/persona/nrodoc/' + o.nroDocumento).then(result => {
+
+					if (result) {
+						set(o => ({ ...o, razonsocial: result.razonsocial }));
+						set(o => ({ ...o, celular: result.celular }));
+						set(o => ({ ...o, direccion: result.direccion }));
+						set(o => ({ ...o, nombape: '' }));
+					} else {
+						set(o => ({ ...o, razonsocial: '' }));
+						set(o => ({ ...o, celular: '' }));
+						set(o => ({ ...o, nombape: '' }));
+						set(o => ({ ...o, direccion: '' }));
+						dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
+					}
+				});
+			}
+		}
+
 	}
 
 	const onChangeTipoDocumento = (e: SelectChangeEvent<HTMLInputElement>) => {
@@ -289,6 +293,7 @@ function FormDisabledExample() {
 									<Grid container spacing={1}>
 										<Grid item xs={12} md={4} >
 											<TextField
+												type={'number'}
 												margin="normal"
 												required
 												fullWidth
@@ -507,6 +512,7 @@ function FormDisabledExample() {
 
 												<Grid item xs={12} md={4} >
 													<TextField
+														type={'number'}
 														sx={{ fontWeight: 'bold' }}
 														margin="normal"
 														required
@@ -623,6 +629,7 @@ function FormDisabledExample() {
 												</Grid>
 												<Grid item xs={12} md={6}>
 													<TextField
+														type={'number'}
 														margin="normal"
 														required
 														fullWidth
