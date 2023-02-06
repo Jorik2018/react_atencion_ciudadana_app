@@ -28,6 +28,8 @@ import {
 	Room as RoomIcon,
 	Search as SearchIcon,
 	Keyboard,
+	ReplyAll,
+	WifiProtectedSetup,
 
 } from '@mui/icons-material';
 import { VRadioGroup } from '../App';
@@ -92,6 +94,10 @@ function FormDisabledExample() {
 		console.log(e.target.textContent);
 		var v = e.target.textContent;
 		set(o => ({ ...o, horaini: v }));
+	}
+	
+	const onClickCambiarHora = (e: any) => {
+		set(o => ({ ...o, horaini: '' }));
 	}
 
 	const onKeyUp = (e: any) => {
@@ -299,12 +305,20 @@ function FormDisabledExample() {
 												{...defaultProps("nroexpediente")}
 											/>
 										</Grid>
-										<Grid item xs={12} md={4}>
-											<Button sx={{ width: 200, padding: 1, margin: 3 }}
+										<Grid item xs={12} md={2}>
+											<Button sx={{ width: 150, padding: 1, margin: 3 }}
 												onClick={onClickBuscar}
 												variant="contained" color="success"
 												endIcon={<SendIcon />}>
 												Buscar
+											</Button>
+										</Grid>
+										<Grid item xs={12} md={2}>
+											<Button className='hover-white' sx={{ width: 150, padding: 1, margin: 3 }}
+												href={process.env.PUBLIC_URL}
+												variant="contained" color="primary"
+												endIcon={<ReplyAll />}>
+												Atras
 											</Button>
 										</Grid>
 
@@ -365,23 +379,38 @@ function FormDisabledExample() {
 												</FormControl>
 											</Grid>
 										</Grid> : <>
-											<TextField
-												margin="normal"
-												required
-												fullWidth
-												disabled
-												id="standard-name"
-												label="Hora de Ingreso al GORE Áncash: "
-												value={o.horaini}
-												InputProps={{
-													startAdornment: (
-														<InputAdornment position="start">
-															<Keyboard />
-														</InputAdornment>
-													),
-												}}
-											/>
-											{/* {o.horaini} */}
+
+											<Grid container>
+												<Grid item xs={12} md={10}>
+													<TextField
+														margin="normal"
+														required
+														fullWidth
+														disabled
+														id="standard-name"
+														label="Hora de Ingreso al GORE Áncash: "
+														value={o.horaini}
+														InputProps={{
+															startAdornment: (
+																<InputAdornment position="start">
+																	<Keyboard />
+																</InputAdornment>
+															),
+														}}
+													/>
+												</Grid>
+												<Grid item xs={12} md={2}>
+													<Button sx={{ width: 150, padding: 1, margin: 3 }}
+														onClick={onClickCambiarHora}
+														variant="contained" color="success"
+														endIcon={<WifiProtectedSetup />}>
+														Modificar
+													</Button>
+												</Grid>
+											</Grid>
+
+
+
 										</>}
 
 										{o.horaini ?

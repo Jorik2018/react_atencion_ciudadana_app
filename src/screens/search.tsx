@@ -311,7 +311,7 @@ function MainDisabledExample() {
                                             </Button>
                                         </Grid>
                                         <Grid item xs={12} md={2}>
-                                            <Button sx={{ width:150, padding: 1, margin: 3 }}
+                                            <Button className='hover-white' sx={{ width:150, padding: 1, margin: 3 }}
                                                 href={process.env.PUBLIC_URL}
                                                 variant="contained" color="primary"
                                                 endIcon={<ReplyAll />}>

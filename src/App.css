@@ -78,3 +78,7 @@
 .border-nav {
   border-bottom: 2px solid #fff;
 }
+
+.hover-white:hover{
+  color: white;
+}

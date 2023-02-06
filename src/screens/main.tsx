@@ -288,7 +288,7 @@ function MainDisabledExample() {
                                                     <CardMedia
                                                         component="img"
                                                         height="200"
-                                                        image="http://sisgedo.regionancash.gob.pe/sisgedonew/imagenes/gedo.jpg"
+                                                        image={process.env.PUBLIC_URL + "/sisgedo.jpg"}
                                                         alt="Busqueda SISGEDO."
                                                     />
                                                     <CardContent>
@@ -301,7 +301,7 @@ function MainDisabledExample() {
                                                     </CardContent>
                                                 </CardActionArea>
                                                 <CardActions>
-                                                    <Button variant="contained" color="success" href='http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php' target={'_blank'} startIcon={<SendIcon />}>
+                                                    <Button className='hover-white' variant="contained" color="success" href='http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php' target={'_blank'} startIcon={<SendIcon />}>
                                                         INGRESAR
                                                     </Button>
                                                 </CardActions>
@@ -327,7 +327,7 @@ function MainDisabledExample() {
                                                     </CardContent>
                                                 </CardActionArea>
                                                 <CardActions>
-                                                    <Button variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/register"}>
+                                                    <Button className='hover-white' variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/register"}>
                                                         INGRESAR
                                                     </Button>
                                                 </CardActions>
@@ -353,7 +353,7 @@ function MainDisabledExample() {
                                                     </CardContent>
                                                 </CardActionArea>
                                                 <CardActions>
-                                                    <Button variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/search"}>
+                                                    <Button className='hover-white' variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/search"}>
                                                         INGRESAR
                                                     </Button>
                                                 </CardActions>

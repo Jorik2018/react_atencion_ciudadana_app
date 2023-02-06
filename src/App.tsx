@@ -115,7 +115,7 @@ function App() {
                     paddingBottom: 2,
                   }}
                   alt="Logo del GORE Áncash."
-                  src="https://www.regionancash.gob.pe/images/logo2018.png"
+                  src={process.env.PUBLIC_URL + "/logogore.png"}
                 />
               </Grid>
 
@@ -127,7 +127,7 @@ function App() {
                   Gobierno Regional de Áncash
                 </Typography>
               </Grid>
-              
+
               <Grid item xs={12} md={2} className="text-center" display={{ xs: "none", lg: "block", md: "block" }}>
                 <Box
                   component="img"
@@ -138,7 +138,7 @@ function App() {
                     paddingBottom: 1,
                   }}
                   alt="Escudo del Perú."
-                  src="https://www.regionancash.gob.pe/images/REPUBLICA%20DEL%20PERU.png"
+                  src={process.env.PUBLIC_URL + "/logoperu.png"}
                 />
               </Grid>
 
