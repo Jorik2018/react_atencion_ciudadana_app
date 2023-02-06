@@ -56,9 +56,7 @@ function VBackdrop() {
     dispatch({ type: 'load', show: show });
   };
   return <Backdrop style={{ zIndex: 100000 }}
-    open={!!load}
-
-  >
+    open={!!load} >
     <CircularProgress />
   </Backdrop>;
 }
