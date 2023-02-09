@@ -44,6 +44,8 @@ function FormDisabledExample() {
 
 	const [dates, setDates] = useState([]);
 
+	const [dias, setDias] = useState([] as any);
+
 	const [o, { defaultProps, bindEvents, validate, set }] = useFormState(useState, {
 		persona: null,
 		tipoPersona: 'Persona Natural',
@@ -149,6 +151,26 @@ function FormDisabledExample() {
 
 	};
 
+	const onChangeDia = (e: SelectChangeEvent<HTMLInputElement>) => {
+
+		console.log(e.target.value);
+		o.dia = e.target.value;
+		set(o => ({ ...o, dia: e.target.value }));
+
+		http.get('http://localhost:8080/cronograma/fechaDisponible/' + p.dependencia + '?dia=' + o.dia).then(result => {
+			setDates(result.times);
+
+			var d = result.dependency;
+			set(o => ({ ...o, dependencia_id: d }));
+
+			// var l = result[0].operationList;
+			// var v = l[l.length - 1].dependencyDestiny || l[l.length - 1].dependency;
+
+			// set(o => ({ ...o, dependencia: v }));
+		});
+
+	};
+
 	const onClickBuscar = () => {
 		if (o.nroexpediente.length > 7) {
 			http.post('https://web.regionancash.gob.pe/api/sisgedo/' + o.nroexpediente, {}).then((result) => {
@@ -169,6 +191,21 @@ function FormDisabledExample() {
 							if (result) {
 								set(o => ({ ...o, dependencia_id: result.id }));
 
+								o.dependencia_id = result.id;
+
+								http.get('http://localhost:8080/cronograma/dependencia/' + o.dependencia_id).then(response => {
+
+									if (response) {
+										setDias(response);
+									}
+									console.log(response);
+
+									// var l = result[0].operationList;
+									// var v = l[l.length - 1].dependencyDestiny || l[l.length - 1].dependency;
+
+									// set(o => ({ ...o, dependencia: v }));
+								});
+
 							} else {
 								console.log("array p", p);
 								http.post('http://localhost:8080/dependencia', p).then((result) => {
@@ -176,18 +213,39 @@ function FormDisabledExample() {
 								});
 							}
 
-							http.get('http://localhost:8080/cronograma/fechaDisponible/' + v).then(result => {
-								setDates(result.times);
 
-								var d = result.dependency;
-								set(o => ({ ...o, dependencia_id: d }));
 
-								// var l = result[0].operationList;
-								// var v = l[l.length - 1].dependencyDestiny || l[l.length - 1].dependency;
 
-								// set(o => ({ ...o, dependencia: v }));
-							});
+
+
 						});
+					} else {
+						dispatch({ type: "snack", msg: 'El número de expediente ingresado no existe, intente nuevamente.', severity: 'warning' });
+					}
+				} else {
+					dispatch({ type: "snack", msg: 'El número de expediente ingresado no existe, intente nuevamente.', severity: 'warning' });
+				}
+			});
+		} else {
+			dispatch({ type: "snack", msg: 'Ingrese los 8 Digitos correspondientes al número de expediente.', severity: 'warning' });
+		}
+	}
+
+	const onClickSearchDias = () => {
+		if (o.nroexpediente.length > 7) {
+			http.post('https://web.regionancash.gob.pe/api/sisgedo/' + o.nroexpediente, {}).then((result) => {
+
+				if (result != undefined) {
+					if (result.length != 0) {
+						var l = result[0].operationList;
+						var v = l[l.length - 1].dependencyDestiny || l[l.length - 1].dependency;
+						var r = l[l.length - 1].fullname;
+
+						set(o => ({ ...o, dependencia: v }));
+
+						p.dependencia = v;
+						p.nombaperesponsable = r;
+
 					} else {
 						dispatch({ type: "snack", msg: 'El número de expediente ingresado no existe, intente nuevamente.', severity: 'warning' });
 					}
@@ -352,6 +410,35 @@ function FormDisabledExample() {
 										</Grid>
 									</Grid>
 
+									<Grid container>
+										<Grid item xs={12} md={4} >
+											<TextField
+												select
+												margin="normal"
+												required
+												fullWidth
+												id="standard-name"
+												label="Seleccione el Día de la Semana: "
+												InputProps={{
+													startAdornment: (
+														<InputAdornment position="start">
+															<Keyboard />
+														</InputAdornment>
+													),
+												}}
+												{...defaultProps("dia", {
+													onChange: onChangeDia
+												})}
+											>
+												{dias.map((item, i) => (
+													<MenuItem key={item.id} value={item.dia}>
+														{item.texto}
+													</MenuItem>
+												))}
+											</TextField>
+										</Grid>
+									</Grid>
+
 									{o.dependencia ? <> {!o.horaini ?
 										<Grid container>
 											<Grid item xs={12} md={12}>
@@ -384,7 +471,6 @@ function FormDisabledExample() {
 												</FormControl>
 											</Grid>
 										</Grid> : <>
-
 											<Grid container>
 												<Grid item xs={12} md={10}>
 													<TextField
@@ -413,9 +499,6 @@ function FormDisabledExample() {
 													</Button>
 												</Grid>
 											</Grid>
-
-
-
 										</>}
 
 										{o.horaini ?
