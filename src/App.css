@@ -63,10 +63,6 @@
   color: #0f62ac !important;
 }
 
-.mt-4 {
-  margin-top: 4em;
-}
-
 .border-color-white {
   border: solid 1px #fff;
 }
@@ -89,6 +85,10 @@
   border: 2px solid #fff;
 }
 
-.pl-6{
-  padding-left: 6em !important;
+.bg-teal {
+  background-color: #009688 !important;
 }
+
+/* .MuiGrid-item {
+  padding-right: 8px;
+} */
