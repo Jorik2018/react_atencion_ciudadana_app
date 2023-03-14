@@ -62,7 +62,7 @@ function MainDisabledExample() {
 
     const onClickBuscar = () => {
         if (o.nrodocumento.length > 7) {
-            http.get(process.env.REACT_APP_BASE_URL + '/atencion/search/' + o.nrodocumento).then(result => {
+            http.get(process.env.REACT_APP_PATH + '/atencion/search/' + o.nrodocumento).then(result => {
                 if (result.length > 0) {
                     setDatos(result);
                 } else {
@@ -126,7 +126,7 @@ function MainDisabledExample() {
                                             {...defaultProps("nrodocumento")}
                                         />
                                     </Grid>
-                                    
+
                                     <Grid item xs={12} sm={2} md={2}>
                                         <Button
                                             sx={{ fontWeight: 'bold' }}

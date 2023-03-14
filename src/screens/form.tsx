@@ -74,7 +74,7 @@ function FormDisabledExample() {
 	const onKeyUp = (e: any) => {
 		if (o.tipoDocumento == 'DNI' && o.tipoPersona == 'Persona Natural') {
 			if (o.nroDocumento.length == 8) {
-				http.get(process.env.REACT_APP_BASE_URL + '/persona/nrodoc/' + o.nroDocumento).then(result => {
+				http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(result => {
 					if (result) {
 						set(o => ({ ...o, celular: result.celular }));
 						set(o => ({ ...o, apellidoNombre: result.apellidoNombre }));
@@ -102,7 +102,7 @@ function FormDisabledExample() {
 
 		if (o.tipoDocumento == 'RUC' && o.tipoPersona == 'Persona Jurídica') {
 			if (o.nroDocumento.length == 11) {
-				http.get(process.env.REACT_APP_BASE_URL + '/persona/nrodoc/' + o.nroDocumento).then(result => {
+				http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(result => {
 					if (result) {
 						set(o => ({ ...o, razonSocial: result.razonSocial }));
 						set(o => ({ ...o, celular: result.celular }));
@@ -145,7 +145,7 @@ function FormDisabledExample() {
 	const onChangeDia = (e: SelectChangeEvent<HTMLInputElement>) => {
 		o.dia = e.target.value;
 		set(o => ({ ...o, dia: e.target.value }));
-		http.get(process.env.REACT_APP_BASE_URL + '/cronograma/fechaDisponible/' + p.dependencia + '?dia=' + o.dia).then(result => {
+		http.get(process.env.REACT_APP_PATH + '/cronograma/fechaDisponible/' + p.dependencia + '?dia=' + o.dia).then(result => {
 			setDates(result.times);
 			var d = result.dependency;
 			set(o => ({ ...o, dependencia_id: d }));
@@ -155,19 +155,19 @@ function FormDisabledExample() {
 	const onClickSave = async () => {
 		const form = formRef.current;
 		if (1 || form != null && validate(form)) {
-			http.get(process.env.REACT_APP_BASE_URL + '/persona/nrodoc/' + o.nroDocumento).then(async result => {
+			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(async result => {
 				if (result) {
 					var p = result.id;
 					o.persona = { id: p };
 				} else {
-					await http.post(process.env.REACT_APP_BASE_URL + '/persona', o).then((result) => {
+					await http.post(process.env.REACT_APP_PATH + '/persona', o).then((result) => {
 						if (result) {
 							o.persona = { id: result.id };
 						}
 					});
 				}
 
-				http.post(process.env.REACT_APP_BASE_URL + '/atencion', { ...o, dependencia: { id: o.dependencia_id } }).then(async (result) => {
+				http.post(process.env.REACT_APP_PATH + '/atencion', { ...o, dependencia: { id: o.dependencia_id } }).then(async (result) => {
 					if (result) {
 						dispatch({ type: "snack", msg: 'Registro grabado!' });
 						set(o => ({}));
@@ -189,7 +189,7 @@ function FormDisabledExample() {
 			var val = e.target.value;
 			var dep = dependencias.find((e) => o.dependencia == val);
 			p.dependencia = dep.name;
-			http.get(process.env.REACT_APP_BASE_URL + '/cronograma/dependencia/' + o.dependencia).then(response => {
+			http.get(process.env.REACT_APP_PATH + '/cronograma/dependencia/' + o.dependencia).then(response => {
 				if (response) {
 					setDias(response);
 				}
@@ -204,7 +204,7 @@ function FormDisabledExample() {
 	}, []);
 
 	const fetchData = async () => {
-		const result = await (http.get(process.env.REACT_APP_BASE_URL + '/dependencia'));
+		const result = await (http.get(process.env.REACT_APP_PATH + '/dependencia'));
 		if (result != '') {
 			setDependencias(result);
 		}
