@@ -80,7 +80,7 @@ function FormDisabledExample() {
 						set(o => ({ ...o, apellidoNombre: result.apellidoNombre }));
 						set(o => ({ ...o, direccion: result.direccion }));
 					} else {
-						http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento + '&out=json').then(result => {
+						http.get('/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento + '&out=json').then(result => {
 							if (result.consultarResponse.return.coResultado === '0000') {
 								let v = result.consultarResponse.return.coResultado;
 								let apename = v.prenombres + ' ' + v.apPrimer + '' + v.apSegundo;
