@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createRef } from 'react';
 import Box from '@mui/material/Box';
-import { TextField, MenuItem, Paper, Button, Grid, CardContent, SelectChangeEvent } from '@mui/material';
+import { TextField, MenuItem, Paper, Button, Grid, CardContent, SelectChangeEvent, Alert } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -222,6 +222,8 @@ function FormDisabledExample() {
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
 						<Card className='mt-4'>
 							<CardContent>
+								<Alert severity="warning">Recuerde que antes de registrar su cita Ud. debe de verificar en que gerencia, subgerencia y/o area se encuentra su trámite administrativo, en la consulta SISGEDO que se encuentra en el siguiente <a target={'_blank'} href="http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php"><b>LINK</b></a></Alert>
+
 								<Typography gutterBottom variant="h5" component="div" className='text-center fw-bold color-gore'>
 									DATOS DEL EXPEDIENTE
 								</Typography>

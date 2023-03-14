@@ -67,7 +67,7 @@ function MainDisabledExample() {
                     setDatos(result);
                 } else {
                     setDatos(result);
-                    dispatch({ type: "snack", msg: 'Ingrese correctamente su documento de identidad o número de RUC.', severity: 'warning' });
+                    dispatch({ type: "snack", msg: 'No se encontro registros de ticket de atención asociadas a su DNI y/o RUC.', severity: 'warning' });
                 }
             });
         } else {
