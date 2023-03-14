@@ -71,6 +71,14 @@ function FormDisabledExample() {
 		set(o => ({ ...o, horaIni: '' }));
 	}
 
+	function disableApellidoNombre() {
+		return !!o.apellidoNombre;
+	}
+
+	function disableDireccion() {
+		return !!o.direccion;
+	}
+
 	const onKeyUp = (e: any) => {
 		if (o.tipoDocumento == 'DNI' && o.tipoPersona == 'Persona Natural') {
 			if (o.nroDocumento.length == 8) {
@@ -80,9 +88,12 @@ function FormDisabledExample() {
 						set(o => ({ ...o, apellidoNombre: result.apellidoNombre }));
 						set(o => ({ ...o, direccion: result.direccion }));
 					} else {
-						http.get('/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento + '&out=json').then(result => {
-							if (result.consultarResponse.return.coResultado === '0000') {
-								let v = result.consultarResponse.return.coResultado;
+						http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento + '&out=json', (h) => {
+							return { "Content-Type": "*/*" };
+						}).then(result => {
+							console.log(result);
+							if (result.consultarResponse.return.coResultado === "0000") {
+								let v = result.consultarResponse.return.datosPersona;
 								let apename = v.prenombres + ' ' + v.apPrimer + '' + v.apSegundo;
 								set(o => ({ ...o, apellidoNombre: apename }));
 								set(o => ({ ...o, direccion: v.direccion }));
@@ -186,11 +197,14 @@ function FormDisabledExample() {
 		if (o.nroExpediente) {
 			o.dependencia = e.target.value;
 			set(o => ({ ...o, dependencia: e.target.value }));
-			var val = e.target.value;
-			var dep = dependencias.find((e) => o.dependencia == val);
+			var dep = dependencias.find((e) => o.dependencia == e.id);
 			p.dependencia = dep.name;
 			http.get(process.env.REACT_APP_PATH + '/cronograma/dependencia/' + o.dependencia).then(response => {
 				if (response) {
+					o.dia = '';
+					o.horaIni = '';
+					set(o => ({ ...o, dia: '' }));
+					set(o => ({ ...o, horaIni: '' }));
 					setDias(response);
 				}
 			});
@@ -222,9 +236,8 @@ function FormDisabledExample() {
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
 						<Card className='mt-4'>
 							<CardContent>
-								<Alert severity="warning">Recuerde que antes de registrar su cita Ud. debe de verificar en que gerencia, subgerencia y/o area se encuentra su trámite administrativo, en la consulta SISGEDO que se encuentra en el siguiente <a target={'_blank'} href="http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php"><b>LINK</b></a></Alert>
-
-								<Typography gutterBottom variant="h5" component="div" className='text-center fw-bold color-gore'>
+								<Alert severity="warning">Recuerde que antes de registrar su cita Ud. debe de verificar en que gerencia, subgerencia y/o area se encuentra su trámite administrativo, en la consulta SISGEDO que se encuentra en el siguiente <a target={'_blank'} href="http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php"><b>LINK</b></a>, del caso contrario no será valida la cita registrada.</Alert>
+								<Typography gutterBottom variant="h5" component="div" className='text-center fw-bold color-gore mt-3'>
 									DATOS DEL EXPEDIENTE
 								</Typography>
 								<Grid container spacing={1}>
@@ -318,7 +331,7 @@ function FormDisabledExample() {
 										</Grid>
 									</Grid>
 								</> : null}
-								{o.dependencia ? <> {!o.horaIni ?
+								{o.dia ? <> {!o.horaIni ?
 									<Grid container>
 										<Grid item xs={12} md={12}>
 											<FormControl>
@@ -496,6 +509,7 @@ function FormDisabledExample() {
 												<Grid container>
 													<Grid item xs={12} md={12}>
 														<TextField
+															disabled={disableApellidoNombre()}
 															margin="normal"
 															required
 															fullWidth
@@ -568,6 +582,7 @@ function FormDisabledExample() {
 										<Grid container spacing={1}>
 											<Grid item xs={12} md={6}>
 												<TextField
+													disabled={disableDireccion()}
 													margin="normal"
 													required
 													fullWidth

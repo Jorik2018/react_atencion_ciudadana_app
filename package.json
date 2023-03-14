@@ -18,7 +18,7 @@
     "@types/react-dom": "^18.0.10",
     "bootstrap": "^5.2.3",
     "dayjs": "^1.11.7",
-    "gra-react-utils": "^1.0.60",
+    "gra-react-utils": "^1.0.68",
     "mdb-react-ui-kit": "^5.1.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
@@ -35,7 +35,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "update_start": "npm install gra-react-utils@latest --force && react-scripts start"
   },
   "eslintConfig": {
     "extends": [
