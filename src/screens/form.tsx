@@ -205,7 +205,9 @@ function FormDisabledExample() {
 
 	const fetchData = async () => {
 		const result = await (http.get(process.env.REACT_APP_BASE_URL + '/dependencia'));
-		setDependencias(result);
+		if (result != '') {
+			setDependencias(result);
+		}
 	};
 
 	return (
@@ -257,7 +259,7 @@ function FormDisabledExample() {
 								</Grid>
 								{o.nroExpediente ? <>
 									<Grid container>
-										<Grid item xs={12} md={4} >
+										<Grid item xs={12} md={12} >
 											<TextField
 												select
 												margin="normal"
