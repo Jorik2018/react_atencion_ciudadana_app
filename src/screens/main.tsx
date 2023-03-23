@@ -7,9 +7,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useResize } from 'gra-react-utils';
 import Card from '@mui/material/Card';
-import {
-    Send as SendIcon,
-} from '@mui/icons-material';
+import { Movie, PictureAsPdf, Send as SendIcon } from '@mui/icons-material';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 function MainDisabledExample() {
 
@@ -43,7 +43,7 @@ function MainDisabledExample() {
                     ref={formRef} onSubmit={onSubmit} style={{ textAlign: 'left' }}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-                        <Card className='mt-4 bg-gore'>
+                        <Card className='mt-5 bg-gore'>
                             <CardContent>
                                 <Typography gutterBottom component="div" fontSize={'30px'} className='text-center fw-bold' color={'white'}>
                                     REGISTRO DE ATENCIÓN AL CIUDADANO
@@ -125,9 +125,24 @@ function MainDisabledExample() {
                                             </CardActions>
                                         </Card>
                                     </Grid>
-
                                 </Grid>
                             </CardContent>
+                            <CardActions>
+                                <Stack sx={{ width: '100%' }} spacing={2}>
+                                    <Grid container spacing={3}>
+                                        <Grid item xs={12} sm={6} md={6}>
+                                            <Button fullWidth className='hover-white bg-teal' variant="contained" color="success" startIcon={<PictureAsPdf />} href={process.env.PUBLIC_URL + "/search"} target={'_blank'}>
+                                                Manual de Usuario - Ver PDF
+                                            </Button>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6} md={6}>
+                                            <Button fullWidth className='hover-white bg-teal' variant="contained" color="success" startIcon={<Movie />} href={process.env.PUBLIC_URL + "/search"} target={'_blank'}>
+                                                Manual de Usuario - Ver Video
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Stack>
+                            </CardActions>
                         </Card>
                     </LocalizationProvider>
                 </Box>
