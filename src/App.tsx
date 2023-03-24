@@ -6,6 +6,7 @@ import MainDisabledExample from './screens/main';
 
 
 import SearchDisabledExample from './screens/search';
+import VideoDisabledExample from './screens/video';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -153,6 +154,7 @@ function App() {
             <Route path={`/`} element={<MainDisabledExample />} />
             <Route path={`/register`} element={<FormDisabledExample />} />
             <Route path={`/search`} element={<SearchDisabledExample />} />
+            <Route path={`/video`} element={<VideoDisabledExample />} />
           </Routes>
         </Router>
       </Box>

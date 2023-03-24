@@ -1,9 +1,7 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { TextField, MenuItem, Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent, CardHeader, Select, SelectChangeEvent } from '@mui/material';
+import { TextField, Button, Grid, CardContent, Paper } from '@mui/material';
 import Container from '@mui/material/Container';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -19,22 +17,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {
-    useNavigate
-} from "react-router-dom";
-import {
     Keyboard,
     Search,
     ReplyAll,
-
 } from '@mui/icons-material';
 
 function MainDisabledExample() {
 
-    const navigate = useNavigate();
-
     const dispatch = useDispatch();
-
-    const formRef: any = createRef();
 
     const pad = (num, places) => String(num).padStart(places, '0')
 
@@ -47,17 +37,11 @@ function MainDisabledExample() {
     const [datos, setDatos] = useState([]);
 
     useEffect(() => {
-
         let header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
         let paper: HTMLElement | null = document.querySelector('.page');
         if (header && paper) {
             paper.style.height = (height - header.offsetHeight) + 'px';
         }
-        /*const [body, toolBar] = formRef.current.children;
-        const nav = document.querySelector('nav');
-        body.style.height = (height - header.offsetHeight - toolBar.offsetHeight) + 'px';
-        toolBar.style.width = (width - nav.offsetWidth) + 'px';*/
-        //}
     }, [width, height]);
 
     const onClickBuscar = () => {
