@@ -9,12 +9,15 @@ import { useResize } from 'gra-react-utils';
 import Card from '@mui/material/Card';
 import { Movie, PictureAsPdf, Send as SendIcon } from '@mui/icons-material';
 import Stack from '@mui/material/Stack';
+import Modal from '@mui/material/Modal';
 
 function MainDisabledExample() {
 
     const formRef: any = createRef();
 
     const { width, height } = useResize(React);
+
+    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
 
@@ -24,9 +27,27 @@ function MainDisabledExample() {
             paper.style.height = (height - header.offsetHeight) + 'px';
         }
 
+        handleOpen();
+
     }, [width, height]);
 
     const onSubmit = data => console.log(data);
+
+    const handleOpen = () => setOpen(true);
+
+    const handleClose = () => setOpen(false);
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     return (
         <Paper className="page color-plomo" style={{ overflow: 'auto' }}>
@@ -143,6 +164,25 @@ function MainDisabledExample() {
                         </Card>
                     </LocalizationProvider>
                 </Box>
+
+                <Modal
+                    keepMounted
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="keep-mounted-modal-title"
+                    aria-describedby="keep-mounted-modal-description"
+                >
+                    <Box sx={style}>
+                        <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+                            Text in a modal
+                        </Typography>
+                        <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
+                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                        </Typography>
+                        <Button onClick={handleClose}>Close Child Modal</Button>
+                    </Box>
+                </Modal>
+
             </Container>
         </Paper>
     );

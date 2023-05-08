@@ -21,6 +21,7 @@ import {
     Search,
     ReplyAll,
 } from '@mui/icons-material';
+import { List, ListItem, ListItemText } from '@mui/material';
 
 function MainDisabledExample() {
 
@@ -146,6 +147,7 @@ function MainDisabledExample() {
                                                     <StyledTableCell className='bg-gore table-gore' align="center">Apellidos y Nombres</StyledTableCell>
                                                     <StyledTableCell className='bg-gore table-gore' align="center">Razon Social</StyledTableCell>
                                                     <StyledTableCell className='bg-gore table-gore' align="center">Dependencia</StyledTableCell>
+                                                    <StyledTableCell className='bg-gore table-gore' align="center">Acompañantes</StyledTableCell>
                                                     <StyledTableCell className='bg-gore table-gore' align="center">Fecha</StyledTableCell>
                                                     <StyledTableCell className='bg-gore table-gore' align="center">Hora</StyledTableCell>
                                                 </TableRow>
@@ -165,6 +167,17 @@ function MainDisabledExample() {
                                                         }
                                                         <StyledTableCell align="center" className='table-gore'>{e.persona.razonSocial}</StyledTableCell>
                                                         <StyledTableCell align="center" className='table-gore'>{e.dependencia.name}</StyledTableCell>
+                                                        <StyledTableCell align="left" className='table-gore'>
+                                                            <ListItem>
+                                                                <ListItemText primary={e.apellidoNombre1}/>
+                                                            </ListItem>
+                                                            <ListItem>
+                                                                <ListItemText primary={e.apellidoNombre2} />
+                                                            </ListItem>
+                                                            <ListItem>
+                                                                <ListItemText primary={e.apellidoNombre3} />
+                                                            </ListItem>
+                                                        </StyledTableCell>
                                                         <StyledTableCell align="center" className='table-gore'>
                                                             <Button variant="contained" color="warning">
                                                                 {pad(e.fecha[2], 2)}/{pad(e.fecha[1], 2)}/{e.fecha[0]}

@@ -83,6 +83,7 @@ function FormDisabledExample() {
 				http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(result => {
 					if (result) {
 						set(o => ({ ...o, celular: result.celular }));
+						set(o => ({ ...o, email: result.email }));
 						set(o => ({ ...o, apellidoNombre: result.apellidoNombre }));
 						set(o => ({ ...o, direccion: result.direccion }));
 					} else {
@@ -92,11 +93,12 @@ function FormDisabledExample() {
 							console.log(result);
 							if (result.consultarResponse.return.coResultado === "0000") {
 								let v = result.consultarResponse.return.datosPersona;
-								let apename = v.prenombres + ' ' + v.apPrimer + '' + v.apSegundo;
+								let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
 								set(o => ({ ...o, apellidoNombre: apename }));
 								set(o => ({ ...o, direccion: v.direccion }));
 							} else {
 								set(o => ({ ...o, celular: '' }));
+								set(o => ({ ...o, email: '' }));
 								set(o => ({ ...o, apellidoNombre: '' }));
 								set(o => ({ ...o, direccion: '' }));
 								dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
@@ -115,11 +117,13 @@ function FormDisabledExample() {
 					if (result) {
 						set(o => ({ ...o, razonSocial: result.razonSocial }));
 						set(o => ({ ...o, celular: result.celular }));
+						set(o => ({ ...o, email: result.email }));
 						set(o => ({ ...o, direccion: result.direccion }));
 						set(o => ({ ...o, apellidoNombre: '' }));
 					} else {
 						set(o => ({ ...o, razonSocial: '' }));
 						set(o => ({ ...o, celular: '' }));
+						set(o => ({ ...o, email: '' }));
 						set(o => ({ ...o, apellidoNombre: '' }));
 						set(o => ({ ...o, direccion: '' }));
 						dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
@@ -130,10 +134,86 @@ function FormDisabledExample() {
 
 	}
 
+	const onKeyUp1 = (e: any) => {
+		if (o.nroDocumento1.length == 8) {
+			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento1).then(result => {
+				if (result) {
+					set(o => ({ ...o, apellidoNombre1: result.apellidoNombre1 }));
+				} else {
+					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento1 + '&out=json', (h) => {
+						return { "Content-Type": "*/*" };
+					}).then(result => {
+						if (result.consultarResponse.return.coResultado === "0000") {
+							let v = result.consultarResponse.return.datosPersona;
+							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
+							set(o => ({ ...o, apellidoNombre1: apename }));
+						} else {
+							set(o => ({ ...o, apellidoNombre1: '' }));
+							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
+						}
+					}).catch(error => {
+						console.log(error)
+					})
+				}
+			});
+		}
+	}
+
+	const onKeyUp2 = (e: any) => {
+		if (o.nroDocumento2.length == 8) {
+			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento2).then(result => {
+				if (result) {
+					set(o => ({ ...o, apellidoNombre2: result.apellidoNombre2 }));
+				} else {
+					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento2 + '&out=json', (h) => {
+						return { "Content-Type": "*/*" };
+					}).then(result => {
+						if (result.consultarResponse.return.coResultado === "0000") {
+							let v = result.consultarResponse.return.datosPersona;
+							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
+							set(o => ({ ...o, apellidoNombre2: apename }));
+						} else {
+							set(o => ({ ...o, apellidoNombre2: '' }));
+							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
+						}
+					}).catch(error => {
+						console.log(error)
+					})
+				}
+			});
+		}
+	}
+
+	const onKeyUp3 = (e: any) => {
+		if (o.nroDocumento3.length == 8) {
+			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento3).then(result => {
+				if (result) {
+					set(o => ({ ...o, apellidoNombre3: result.apellidoNombre3 }));
+				} else {
+					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento3 + '&out=json', (h) => {
+						return { "Content-Type": "*/*" };
+					}).then(result => {
+						if (result.consultarResponse.return.coResultado === "0000") {
+							let v = result.consultarResponse.return.datosPersona;
+							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
+							set(o => ({ ...o, apellidoNombre3: apename }));
+						} else {
+							set(o => ({ ...o, apellidoNombre3: '' }));
+							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
+						}
+					}).catch(error => {
+						console.log(error)
+					})
+				}
+			});
+		}
+	}
+
 	const onChangeTipoDocumento = (e: SelectChangeEvent<HTMLInputElement>) => {
 		set(o => ({ ...o, tipoDocumento: e.target.value }));
 		set(o => ({ ...o, nroDocumento: '' }));
 		set(o => ({ ...o, celular: '' }));
+		set(o => ({ ...o, email: '' }));
 		set(o => ({ ...o, apellidoNombre: '' }));
 		set(o => ({ ...o, direccion: '' }));
 		set(o => ({ ...o, razonSocial: '' }));
@@ -145,6 +225,7 @@ function FormDisabledExample() {
 		set(o => ({ ...o, tipoDocumento: 'DNI' }));
 		set(o => ({ ...o, nroDocumento: '' }));
 		set(o => ({ ...o, celular: '' }));
+		set(o => ({ ...o, email: '' }));
 		set(o => ({ ...o, apellidoNombre: '' }));
 		set(o => ({ ...o, direccion: '' }));
 		set(o => ({ ...o, razonSocial: '' }));
@@ -423,6 +504,13 @@ function FormDisabledExample() {
 										<Typography gutterBottom variant="h5" component="div">
 											Datos Personales
 										</Typography>
+										{o.tipoPersona == 'Persona Jurídica' ?
+											<>
+												<Stack sx={{ width: '100%' }} spacing={2}>
+													<Alert severity="warning">Recuerde que en el tipo de PERSONA JURÍDICA solamente puede ingresar al GORE el Representante Legal de la empresa o este deberá de designar mediante una carta Poder hacia otra persona indicando la autorizacion para su ingreso al GORE Áncash, del caso contrario no podrán ingresar terceras personas.</Alert>
+												</Stack>
+											</>
+											: null}
 										<Grid container spacing={1}>
 											<Grid item xs={12} md={4} >
 												<TextField
@@ -578,7 +666,7 @@ function FormDisabledExample() {
 											: null}
 
 										<Grid container spacing={1}>
-											<Grid item xs={12} md={6}>
+											<Grid item xs={12} md={12}>
 												<TextField
 													disabled={disableDireccion()}
 													margin="normal"
@@ -596,6 +684,27 @@ function FormDisabledExample() {
 														),
 													}}
 													{...defaultProps("direccion")}
+												/>
+											</Grid>
+										</Grid>
+										<Grid container spacing={1}>
+											<Grid item xs={12} md={6}>
+												<TextField
+													margin="normal"
+													required
+													fullWidth
+													size="medium"
+													id="standard-name"
+													label="Ingrese su Correo Electrónico: "
+													placeholder="Correo Electrónico."
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("email")}
 												/>
 											</Grid>
 											<Grid item xs={12} md={6}>
@@ -621,6 +730,144 @@ function FormDisabledExample() {
 										</Grid>
 									</CardContent>
 								</Card>
+
+								<Card>
+									<CardContent>
+										<Typography gutterBottom variant="h5" component="div">
+											Acompañantes
+										</Typography>
+										<Grid container spacing={1}>
+											<Grid item xs={12} md={4} >
+												<TextField
+													type={'number'}
+													sx={{ fontWeight: 'bold' }}
+													margin="normal"
+													required
+													fullWidth
+													id="standard-name"
+													label="Número de Documento: "
+													placeholder="Ingrese el número de Documento."
+													onKeyUp={onKeyUp1}
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("nroDocumento1")}
+												/>
+											</Grid>
+											<Grid item xs={12} md={8}>
+												<TextField
+													disabled={disableApellidoNombre()}
+													margin="normal"
+													required
+													fullWidth
+													size="medium"
+													id="standard-name"
+													label="Ingrese sus Apellidos y Nombres: "
+													placeholder="Apellidos y Nombres."
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("apellidoNombre1")}
+												/>
+											</Grid>
+										</Grid>
+										<Grid container spacing={1}>
+											<Grid item xs={12} md={4} >
+												<TextField
+													type={'number'}
+													sx={{ fontWeight: 'bold' }}
+													margin="normal"
+													required
+													fullWidth
+													id="standard-name"
+													label="Número de Documento: "
+													placeholder="Ingrese el número de Documento."
+													onKeyUp={onKeyUp2}
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("nroDocumento2")}
+												/>
+											</Grid>
+											<Grid item xs={12} md={8}>
+												<TextField
+													disabled={disableApellidoNombre()}
+													margin="normal"
+													required
+													fullWidth
+													size="medium"
+													id="standard-name"
+													label="Ingrese sus Apellidos y Nombres: "
+													placeholder="Apellidos y Nombres."
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("apellidoNombre2")}
+												/>
+											</Grid>
+										</Grid>
+										<Grid container spacing={1}>
+											<Grid item xs={12} md={4} >
+												<TextField
+													type={'number'}
+													sx={{ fontWeight: 'bold' }}
+													margin="normal"
+													required
+													fullWidth
+													id="standard-name"
+													label="Número de Documento: "
+													placeholder="Ingrese el número de Documento."
+													onKeyUp={onKeyUp3}
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("nroDocumento3")}
+												/>
+											</Grid>
+											<Grid item xs={12} md={8}>
+												<TextField
+													disabled={disableApellidoNombre()}
+													margin="normal"
+													required
+													fullWidth
+													size="medium"
+													id="standard-name"
+													label="Ingrese sus Apellidos y Nombres: "
+													placeholder="Apellidos y Nombres."
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("apellidoNombre3")}
+												/>
+											</Grid>
+										</Grid>
+									</CardContent>
+								</Card>
+
 								<Stack spacing={1}>
 									<Stack direction="row" justifyContent="center"
 										style={{ padding: '10px' }}
