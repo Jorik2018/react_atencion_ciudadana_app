@@ -138,7 +138,7 @@ function MainDisabledExample() {
                                     <Grid item xs={12} sm={2} md={2}>
                                     </Grid>
 
-                                    <TableContainer component={Paper}>
+                                    {/* <TableContainer component={Paper}>
                                         <Table sx={{ minWidth: 700 }} aria-label="customized table">
                                             <TableHead>
                                                 <TableRow>
@@ -169,7 +169,7 @@ function MainDisabledExample() {
                                                         <StyledTableCell align="center" className='table-gore'>{e.dependencia.name}</StyledTableCell>
                                                         <StyledTableCell align="left" className='table-gore'>
                                                             <ListItem>
-                                                                <ListItemText primary={e.apellidoNombre1}/>
+                                                                <ListItemText primary={e.apellidoNombre1} />
                                                             </ListItem>
                                                             <ListItem>
                                                                 <ListItemText primary={e.apellidoNombre2} />
@@ -192,7 +192,7 @@ function MainDisabledExample() {
                                                 ))}
                                             </TableBody>
 
-                                            {/* <TableBody>
+                                         <TableBody>
                                                     {rows.map((row) => (
                                                         <StyledTableRow key={row.name}>
                                                             <StyledTableCell component="th" scope="row">
@@ -204,10 +204,74 @@ function MainDisabledExample() {
                                                             <StyledTableCell align="right">{row.protein}</StyledTableCell>
                                                         </StyledTableRow>
                                                     ))}
-                                                </TableBody> */}
+                                                </TableBody> 
 
                                         </Table>
-                                    </TableContainer>
+                                    </TableContainer> */}
+
+                                    {datos.map((e: any) => (
+                                        <Card sx={{ backgroundColor: '#f0f0f0', margin: '5px' }}>
+                                            <CardContent>
+                                                <Grid container spacing={2}>
+                                                    {e.activo == '2' ?
+                                                        <>
+                                                            <Grid item xs={12}>
+                                                                <Typography variant="h6" gutterBottom>
+                                                                    CITA CANCELADA
+                                                                </Typography>
+                                                                <Typography color="textSecondary">
+                                                                    Motivo: {e.motivoCancelar}
+                                                                </Typography>
+                                                            </Grid>
+                                                        </>
+                                                        : null}
+                                                    <Grid item xs={6}>
+                                                        <Typography variant="h6" gutterBottom>
+                                                            {e.persona.apellidoNombre}
+                                                        </Typography>
+                                                        <Typography color="textSecondary">
+                                                            DNI: {e.persona.nroDocumento}
+                                                        </Typography>
+                                                        <Typography color="textSecondary">
+                                                            N° de expediente: {e.nroExpediente}
+                                                        </Typography>
+                                                        <Typography color="textSecondary">
+                                                            Motivo: {e.motivo}
+                                                        </Typography>
+                                                        <Typography color="textSecondary">
+                                                            Dependencia: {e.dependencia.name}
+                                                        </Typography>
+                                                    </Grid>
+
+                                                    {e.nroDocumento1 || e.nroDocumento2 || e.nroDocumento3 ?
+                                                        <>
+                                                            <Grid item xs={6}>
+                                                                <Typography variant="h6" gutterBottom>
+                                                                    Acompañantes
+                                                                </Typography>
+                                                                <Typography color="textSecondary">
+                                                                    {e.nroDocumento1} - {e.apellidoNombre1}
+                                                                </Typography>
+                                                                <Typography color="textSecondary">
+                                                                    {e.nroDocumento2} - {e.apellidoNombre2}
+                                                                </Typography>
+                                                                <Typography color="textSecondary">
+                                                                    {e.nroDocumento3} - {e.apellidoNombre3}
+                                                                </Typography>
+
+                                                            </Grid>
+                                                        </>
+                                                        : null}
+                                                    <Grid item xs={12}>
+                                                        <Typography variant="h6" color="textSecondary">
+                                                            Fecha y hora de la cita:  {pad(e.fecha[2], 2)}/{pad(e.fecha[1], 2)}/{e.fecha[0]} {e.horaIni}
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </CardContent>
+                                        </Card>
+                                    ))}
+
 
                                     <Grid>
 
@@ -216,9 +280,9 @@ function MainDisabledExample() {
                             </CardContent>
                         </Card>
                     </LocalizationProvider>
-                </Box>
-            </Container>
-        </Paper>
+                </Box >
+            </Container >
+        </Paper >
     );
 }
 

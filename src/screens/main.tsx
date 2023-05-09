@@ -165,7 +165,7 @@ function MainDisabledExample() {
                     </LocalizationProvider>
                 </Box>
 
-                <Modal
+                {/* <Modal
                     keepMounted
                     open={open}
                     onClose={handleClose}
@@ -174,14 +174,14 @@ function MainDisabledExample() {
                 >
                     <Box sx={style}>
                         <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-                            Text in a modal
+                           Bienvenido !!!
                         </Typography>
                         <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                            Gobierno Regional de Áncash - Trasparencia
                         </Typography>
-                        <Button onClick={handleClose}>Close Child Modal</Button>
+                        <Button onClick={handleClose}>Close</Button>
                     </Box>
-                </Modal>
+                </Modal> */}
 
             </Container>
         </Paper>
