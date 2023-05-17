@@ -35,6 +35,8 @@ function FormDisabledExample() {
 
 	const [dependencias, setDependencias] = useState([] as any);
 
+	const [currentTime, setCurrentTime] = useState('');
+
 	const navigate = useNavigate();
 
 	const [o, { defaultProps, validate, set }] = useFormState(useState, {
@@ -57,6 +59,20 @@ function FormDisabledExample() {
 			paper.style.height = (height - header.offsetHeight) + 'px';
 		}
 	}, [width, height]);
+
+	useEffect(() => {
+		// Actualizar la hora cada segundo
+		const interval = setInterval(() => {
+			const date = new Date();
+			const time = date.toLocaleTimeString();
+			setCurrentTime(time);
+		}, 1000);
+
+		// Limpiar el intervalo cuando el componente se desmonte
+		return () => {
+			clearInterval(interval);
+		};
+	}, []);
 
 	const onSubmit = data => console.log(data);
 
@@ -320,25 +336,31 @@ function FormDisabledExample() {
 									DATOS DEL EXPEDIENTE
 								</Typography>
 								<Grid container spacing={1}>
-									<Grid item xs={12} sm={6} md={4}>
-										<TextField
-											type={'number'}
-											margin="normal"
-											required
-											fullWidth
-											id="standard-name"
-											label="Número de Expediente: "
-											placeholder="Ingrese el número de Expediente"
-											InputProps={{
-												startAdornment: (
-													<InputAdornment position="start">
-														<Keyboard />
-													</InputAdornment>
-												),
-											}}
-											{...defaultProps("nroExpediente")}
-										/>
-									</Grid>
+
+									{currentTime >= "08:00:00" && currentTime <= "16:30:00" ?
+										<>
+											<Grid item xs={12} sm={6} md={4}>
+												<TextField
+													type={'number'}
+													margin="normal"
+													required
+													fullWidth
+													id="standard-name"
+													label="Número de Expediente: "
+													placeholder="Ingrese el número de Expediente"
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("nroExpediente")}
+												/>
+											</Grid>
+										</>
+										: null}
+
 									<Grid item xs={12} sm={2} md={2}>
 										<Button
 											sx={{ fontWeight: 'bold' }}

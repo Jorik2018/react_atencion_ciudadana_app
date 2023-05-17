@@ -1,6 +1,6 @@
-import React, { useEffect, createRef } from 'react';
+import React, { useEffect, createRef, useState } from 'react';
 import Box from '@mui/material/Box';
-import { Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent } from '@mui/material';
+import { Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent, Alert } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -18,6 +18,8 @@ function MainDisabledExample() {
     const { width, height } = useResize(React);
 
     const [open, setOpen] = React.useState(false);
+
+    const [currentTime, setCurrentTime] = useState('');
 
     useEffect(() => {
 
@@ -48,6 +50,21 @@ function MainDisabledExample() {
         boxShadow: 24,
         p: 4,
     };
+
+
+    useEffect(() => {
+        // Actualizar la hora cada segundo
+        const interval = setInterval(() => {
+            const date = new Date();
+            const time = date.toLocaleTimeString();
+            setCurrentTime(time);
+        }, 1000);
+
+        // Limpiar el intervalo cuando el componente se desmonte
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     return (
         <Paper className="page color-plomo" style={{ overflow: 'auto' }}>
@@ -111,11 +128,16 @@ function MainDisabledExample() {
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
-                                            <CardActions className='pl-6'>
-                                                <Button fullWidth className='hover-white bg-teal' variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/register"}>
-                                                    INGRESAR
-                                                </Button>
-                                            </CardActions>
+                                            {currentTime >= "08:00:00" && currentTime <= "16:30:00" ?
+                                                <>
+                                                    <CardActions className='pl-6'>
+                                                        <Button fullWidth className='hover-white bg-teal' variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/register"}>
+                                                            INGRESAR
+                                                        </Button>
+                                                    </CardActions>
+                                                </>
+                                                : <Alert severity="warning">Recuerde que el horario de atención para sacar citas es de Lunes a Viernes de 08:00 am - 04:30 pm.</Alert>
+                                            }
                                         </Card>
                                     </Grid>
                                     <Grid item xs={12} sm={4} md={4}>
@@ -162,6 +184,7 @@ function MainDisabledExample() {
                                 </Stack>
                             </CardActions>
                         </Card>
+
                     </LocalizationProvider>
                 </Box>
 
