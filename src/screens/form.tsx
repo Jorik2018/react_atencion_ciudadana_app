@@ -337,7 +337,7 @@ function FormDisabledExample() {
 								</Typography>
 								<Grid container spacing={1}>
 
-									{currentTime >= "08:00:00" && currentTime <= "18:30:00" ?
+									{currentTime >= "08:00:00" && currentTime <= "16:30:00" ?
 										<>
 											<Grid item xs={12} sm={6} md={4}>
 												<TextField
