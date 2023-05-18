@@ -58,7 +58,7 @@ function MainDisabledExample() {
             const date = new Date();
             const time = date.toLocaleTimeString();
             setCurrentTime(time);
-        }, 1000);
+        }, 10);
 
         // Limpiar el intervalo cuando el componente se desmonte
         return () => {
@@ -128,16 +128,16 @@ function MainDisabledExample() {
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
-                                            {/* {currentTime >= "08:00:00" && currentTime <= "16:30:00" ?
-                                                <> */}
+                                            {currentTime >= "08:00:00" && currentTime <= "16:30:00" ?
+                                                <>
                                                     <CardActions className='pl-6'>
                                                         <Button fullWidth className='hover-white bg-teal' variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/register"}>
                                                             INGRESAR
                                                         </Button>
                                                     </CardActions>
-                                                {/* </>
+                                                </>
                                                 : <Alert severity="warning">Recuerde que el horario de atención para sacar citas es de Lunes a Viernes de 08:00 am - 04:30 pm.</Alert>
-                                            } */}
+                                            }
                                         </Card>
                                     </Grid>
                                     <Grid item xs={12} sm={4} md={4}>
