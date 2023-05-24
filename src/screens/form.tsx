@@ -154,7 +154,7 @@ function FormDisabledExample() {
 		if (o.nroDocumento1.length == 8) {
 			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento1).then(result => {
 				if (result) {
-					set(o => ({ ...o, apellidoNombre1: result.apellidoNombre1 }));
+					set(o => ({ ...o, apellidoNombre1: result.apellidoNombre }));
 				} else {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento1 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
@@ -179,7 +179,7 @@ function FormDisabledExample() {
 		if (o.nroDocumento2.length == 8) {
 			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento2).then(result => {
 				if (result) {
-					set(o => ({ ...o, apellidoNombre2: result.apellidoNombre2 }));
+					set(o => ({ ...o, apellidoNombre2: result.apellidoNombre }));
 				} else {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento2 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
@@ -204,7 +204,7 @@ function FormDisabledExample() {
 		if (o.nroDocumento3.length == 8) {
 			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento3).then(result => {
 				if (result) {
-					set(o => ({ ...o, apellidoNombre3: result.apellidoNombre3 }));
+					set(o => ({ ...o, apellidoNombre3: result.apellidoNombre }));
 				} else {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento3 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
