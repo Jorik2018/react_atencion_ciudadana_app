@@ -229,9 +229,23 @@ function MainDisabledExample() {
                                                         <Typography variant="h6" gutterBottom>
                                                             {e.persona.apellidoNombre}
                                                         </Typography>
+                                                        {e.persona.razonSocial != '' || e.persona.razonSocial != null ?
+                                                            <>
+                                                                <Typography variant='h6' gutterBottom>
+                                                                    {e.persona.razonSocial}
+                                                                </Typography>
+                                                            </>
+                                                            : null}
                                                         <Typography color="textSecondary">
-                                                            DNI: {e.persona.nroDocumento}
+                                                            RUC: {e.persona.nroDocumento}
                                                         </Typography>
+                                                        {e.persona.representanteLegal != '' || e.persona.representanteLegal != null ?
+                                                            <>
+                                                                <Typography color="textSecondary">
+                                                                    Representante Legal: {e.persona.representanteLegal}
+                                                                </Typography>
+                                                            </>
+                                                            : null}
                                                         <Typography color="textSecondary">
                                                             N° de expediente: {e.nroExpediente}
                                                         </Typography>
