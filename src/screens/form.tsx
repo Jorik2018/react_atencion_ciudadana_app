@@ -86,11 +86,51 @@ function FormDisabledExample() {
 	}
 
 	function disableApellidoNombre() {
-		return !!o.apellidoNombre;
+		if (o.varTemp === 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function disableApellidoNombre01() {
+		if (o.varTemponKeyUp1 === 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function disableApellidoNombre02() {
+		if (o.varTemponKeyUp2 === 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function disableApellidoNombre03() {
+		if (o.varTemponKeyUp3 === 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	function disableDireccion() {
-		return !!o.direccion;
+		if (o.varTemp === 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function disableInput() {
+		if (o.varTemp === 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	const onKeyUp = (e: any) => {
@@ -102,6 +142,7 @@ function FormDisabledExample() {
 						set(o => ({ ...o, email: result.email }));
 						set(o => ({ ...o, apellidoNombre: result.apellidoNombre }));
 						set(o => ({ ...o, direccion: result.direccion }));
+						set((o: any) => ({ ...o, varTemp: 1 }));
 					} else {
 						http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento + '&out=json', (h) => {
 							return { "Content-Type": "*/*" };
@@ -112,11 +153,13 @@ function FormDisabledExample() {
 								let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
 								set(o => ({ ...o, apellidoNombre: apename }));
 								set(o => ({ ...o, direccion: v.direccion }));
+								set((o: any) => ({ ...o, varTemp: 1 }));
 							} else {
 								set(o => ({ ...o, celular: '' }));
 								set(o => ({ ...o, email: '' }));
 								set(o => ({ ...o, apellidoNombre: '' }));
 								set(o => ({ ...o, direccion: '' }));
+								set((o: any) => ({ ...o, varTemp: 0 }));
 								dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
 							}
 						}).catch(error => {
@@ -135,13 +178,17 @@ function FormDisabledExample() {
 						set(o => ({ ...o, celular: result.celular }));
 						set(o => ({ ...o, email: result.email }));
 						set(o => ({ ...o, direccion: result.direccion }));
+						set(o => ({ ...o, representanteLegal: result.representanteLegal }));
 						set(o => ({ ...o, apellidoNombre: '' }));
+						set((o: any) => ({ ...o, varTemp: 1 }));
 					} else {
 						set(o => ({ ...o, razonSocial: '' }));
 						set(o => ({ ...o, celular: '' }));
 						set(o => ({ ...o, email: '' }));
-						set(o => ({ ...o, apellidoNombre: '' }));
 						set(o => ({ ...o, direccion: '' }));
+						set(o => ({ ...o, representanteLegal: '' }));
+						set(o => ({ ...o, apellidoNombre: '' }));
+						set((o: any) => ({ ...o, varTemp: 0 }));
 						dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
 					}
 				});
@@ -155,6 +202,7 @@ function FormDisabledExample() {
 			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento1).then(result => {
 				if (result) {
 					set(o => ({ ...o, apellidoNombre1: result.apellidoNombre }));
+					set((o: any) => ({ ...o, varTemponKeyUp1: 1 }));
 				} else {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento1 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
@@ -163,8 +211,10 @@ function FormDisabledExample() {
 							let v = result.consultarResponse.return.datosPersona;
 							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
 							set(o => ({ ...o, apellidoNombre1: apename }));
+							set((o: any) => ({ ...o, varTemponKeyUp1: 1 }));
 						} else {
 							set(o => ({ ...o, apellidoNombre1: '' }));
+							set((o: any) => ({ ...o, varTemponKeyUp1: 0 }));
 							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
 						}
 					}).catch(error => {
@@ -180,6 +230,7 @@ function FormDisabledExample() {
 			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento2).then(result => {
 				if (result) {
 					set(o => ({ ...o, apellidoNombre2: result.apellidoNombre }));
+					set((o: any) => ({ ...o, varTemponKeyUp2: 1 }));
 				} else {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento2 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
@@ -188,8 +239,10 @@ function FormDisabledExample() {
 							let v = result.consultarResponse.return.datosPersona;
 							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
 							set(o => ({ ...o, apellidoNombre2: apename }));
+							set((o: any) => ({ ...o, varTemponKeyUp2: 1 }));
 						} else {
 							set(o => ({ ...o, apellidoNombre2: '' }));
+							set((o: any) => ({ ...o, varTemponKeyUp2: 0 }));
 							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
 						}
 					}).catch(error => {
@@ -205,6 +258,7 @@ function FormDisabledExample() {
 			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento3).then(result => {
 				if (result) {
 					set(o => ({ ...o, apellidoNombre3: result.apellidoNombre }));
+					set((o: any) => ({ ...o, varTemponKeyUp3: 1 }));
 				} else {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento3 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
@@ -213,8 +267,10 @@ function FormDisabledExample() {
 							let v = result.consultarResponse.return.datosPersona;
 							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
 							set(o => ({ ...o, apellidoNombre3: apename }));
+							set((o: any) => ({ ...o, varTemponKeyUp3: 1 }));
 						} else {
 							set(o => ({ ...o, apellidoNombre3: '' }));
+							set((o: any) => ({ ...o, varTemponKeyUp3: 0 }));
 							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
 						}
 					}).catch(error => {
@@ -339,26 +395,26 @@ function FormDisabledExample() {
 
 									{/* {currentTime >= "08:00:00" && currentTime <= "16:30:00" ?
 										<> */}
-											<Grid item xs={12} sm={6} md={4}>
-												<TextField
-													type={'number'}
-													margin="normal"
-													required
-													fullWidth
-													id="standard-name"
-													label="Número de Expediente: "
-													placeholder="Ingrese el número de Expediente"
-													InputProps={{
-														startAdornment: (
-															<InputAdornment position="start">
-																<Keyboard />
-															</InputAdornment>
-														),
-													}}
-													{...defaultProps("nroExpediente")}
-												/>
-											</Grid>
-										{/* </>
+									<Grid item xs={12} sm={6} md={4}>
+										<TextField
+											type={'number'}
+											margin="normal"
+											required
+											fullWidth
+											id="standard-name"
+											label="Número de Expediente: "
+											placeholder="Ingrese el número de Expediente"
+											InputProps={{
+												startAdornment: (
+													<InputAdornment position="start">
+														<Keyboard />
+													</InputAdornment>
+												),
+											}}
+											{...defaultProps("nroExpediente")}
+										/>
+									</Grid>
+									{/* </>
 										: null} */}
 
 									<Grid item xs={12} sm={2} md={2}>
@@ -644,6 +700,7 @@ function FormDisabledExample() {
 												<Grid container>
 													<Grid item xs={12} md={12}>
 														<TextField
+															disabled={disableInput()}
 															margin="normal"
 															required
 															fullWidth
@@ -666,6 +723,7 @@ function FormDisabledExample() {
 												<Grid container>
 													<Grid item xs={12} md={12}>
 														<TextField
+															disabled={disableInput()}
 															margin="normal"
 															required
 															fullWidth
@@ -782,7 +840,7 @@ function FormDisabledExample() {
 											</Grid>
 											<Grid item xs={12} md={8}>
 												<TextField
-													disabled={disableApellidoNombre()}
+													disabled={disableApellidoNombre01()}
 													margin="normal"
 													required
 													fullWidth
@@ -825,7 +883,7 @@ function FormDisabledExample() {
 											</Grid>
 											<Grid item xs={12} md={8}>
 												<TextField
-													disabled={disableApellidoNombre()}
+													disabled={disableApellidoNombre02()}
 													margin="normal"
 													required
 													fullWidth
@@ -868,7 +926,7 @@ function FormDisabledExample() {
 											</Grid>
 											<Grid item xs={12} md={8}>
 												<TextField
-													disabled={disableApellidoNombre()}
+													disabled={disableApellidoNombre03()}
 													margin="normal"
 													required
 													fullWidth

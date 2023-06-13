@@ -226,35 +226,37 @@ function MainDisabledExample() {
                                                         </>
                                                         : null}
                                                     <Grid item xs={6}>
-                                                        <Typography variant="h6" gutterBottom>
-                                                            {e.persona.apellidoNombre}
-                                                        </Typography>
-                                                        {e.persona.razonSocial != '' || e.persona.razonSocial != null ?
+                                                        {e.persona.tipoDocumento === 'RUC' ?
                                                             <>
                                                                 <Typography variant='h6' gutterBottom>
                                                                     {e.persona.razonSocial}
                                                                 </Typography>
-                                                            </>
-                                                            : null}
-                                                        <Typography color="textSecondary">
-                                                            RUC: {e.persona.nroDocumento}
-                                                        </Typography>
-                                                        {e.persona.representanteLegal != '' || e.persona.representanteLegal != null ?
-                                                            <>
                                                                 <Typography color="textSecondary">
-                                                                    Representante Legal: {e.persona.representanteLegal}
+                                                                    <b>RUC: </b> {e.persona.nroDocumento}
+                                                                </Typography>
+                                                                <Typography color="textSecondary">
+                                                                    <b>Representante Legal: </b> {e.persona.representanteLegal}
                                                                 </Typography>
                                                             </>
-                                                            : null}
+                                                            : <>
+                                                                <Typography variant="h6" gutterBottom>
+                                                                    {e.persona.apellidoNombre}
+                                                                </Typography>
+                                                                <Typography color="textSecondary">
+                                                                    <b>DNI: </b> {e.persona.nroDocumento}
+                                                                </Typography>
+                                                            </>
+                                                        }
                                                         <Typography color="textSecondary">
-                                                            N° de expediente: {e.nroExpediente}
+                                                            <b>N° de expediente: </b> {e.nroExpediente}
                                                         </Typography>
                                                         <Typography color="textSecondary">
-                                                            Motivo: {e.motivo}
+                                                            <b>Motivo: </b> {e.motivo}
                                                         </Typography>
                                                         <Typography color="textSecondary">
-                                                            Dependencia: {e.dependencia.name}
+                                                            <b>Dependencia: </b> {e.dependencia.name}
                                                         </Typography>
+
                                                     </Grid>
 
                                                     {e.nroDocumento1 || e.nroDocumento2 || e.nroDocumento3 ?
