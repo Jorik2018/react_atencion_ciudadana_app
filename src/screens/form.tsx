@@ -393,29 +393,28 @@ function FormDisabledExample() {
 								</Typography>
 								<Grid container spacing={1}>
 
-									{/* {currentTime >= "08:00:00" && currentTime <= "16:30:00" ?
-										<> */}
-									<Grid item xs={12} sm={6} md={4}>
-										<TextField
-											type={'number'}
-											margin="normal"
-											required
-											fullWidth
-											id="standard-name"
-											label="Número de Expediente: "
-											placeholder="Ingrese el número de Expediente"
-											InputProps={{
-												startAdornment: (
-													<InputAdornment position="start">
-														<Keyboard />
-													</InputAdornment>
-												),
-											}}
-											{...defaultProps("nroExpediente")}
-										/>
-									</Grid>
-									{/* </>
-										: null} */}
+									{currentTime >= "08:00:00" && currentTime <= "16:30:00" &&
+										<>
+											<Grid item xs={12} sm={6} md={4}>
+												<TextField
+													type={'number'}
+													margin="normal"
+													required
+													fullWidth
+													id="standard-name"
+													label="Número de Expediente: "
+													placeholder="Ingrese el número de Expediente"
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position="start">
+																<Keyboard />
+															</InputAdornment>
+														),
+													}}
+													{...defaultProps("nroExpediente")}
+												/>
+											</Grid>
+										</>}
 
 									<Grid item xs={12} sm={2} md={2}>
 										<Button
