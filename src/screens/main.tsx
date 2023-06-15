@@ -19,7 +19,7 @@ function MainDisabledExample() {
 
     const [open, setOpen] = React.useState(false);
 
-    const [currentTime, setCurrentTime] = useState('');
+    const [currentTime, setCurrentTime] = useState<Date>(new Date());;
 
     useEffect(() => {
 
@@ -53,18 +53,19 @@ function MainDisabledExample() {
 
 
     useEffect(() => {
-        // Actualizar la hora cada segundo
-        const interval = setInterval(() => {
-            const date = new Date();
-            const time = date.toLocaleTimeString();
-            setCurrentTime(time);
-        }, 10);
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
 
-        // Limpiar el intervalo cuando el componente se desmonte
         return () => {
-            clearInterval(interval);
+            clearInterval(timer);
         };
     }, []);
+
+    const isTime = () => {
+        const currentHour = currentTime.getHours();
+        return currentHour >= 8 && currentHour <= 15;
+    }
 
     return (
         <Paper className="page color-plomo" style={{ overflow: 'auto' }}>
@@ -128,7 +129,7 @@ function MainDisabledExample() {
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
-                                            {currentTime >= "08:00:00" && currentTime <= "16:30:00" ? (
+                                            {isTime() ? (
                                                 <CardActions className='pl-6'>
                                                     <Button fullWidth className='hover-white bg-teal' variant="contained" color="success" startIcon={<SendIcon />} href={process.env.PUBLIC_URL + "/register"}>
                                                         INGRESAR

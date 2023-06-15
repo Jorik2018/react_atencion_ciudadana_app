@@ -35,7 +35,7 @@ function FormDisabledExample() {
 
 	const [dependencias, setDependencias] = useState([] as any);
 
-	const [currentTime, setCurrentTime] = useState('');
+	const [currentTime, setCurrentTime] = useState<Date>(new Date());;
 
 	const navigate = useNavigate();
 
@@ -61,18 +61,19 @@ function FormDisabledExample() {
 	}, [width, height]);
 
 	useEffect(() => {
-		// Actualizar la hora cada segundo
-		const interval = setInterval(() => {
-			const date = new Date();
-			const time = date.toLocaleTimeString();
-			setCurrentTime(time);
-		}, 10);
+		const timer = setInterval(() => {
+			setCurrentTime(new Date());
+		}, 1000);
 
-		// Limpiar el intervalo cuando el componente se desmonte
 		return () => {
-			clearInterval(interval);
+			clearInterval(timer);
 		};
 	}, []);
+
+	const isTime = () => {
+		const currentHour = currentTime.getHours();
+		return currentHour >=8 && currentHour <= 15;
+	}
 
 	const onSubmit = data => console.log(data);
 
@@ -393,8 +394,8 @@ function FormDisabledExample() {
 								</Typography>
 								<Grid container spacing={1}>
 
-									{currentTime >= "08:00:00" && currentTime <= "16:30:00" &&
-										<>
+									{isTime() ?
+										(
 											<Grid item xs={12} sm={6} md={4}>
 												<TextField
 													type={'number'}
@@ -414,7 +415,9 @@ function FormDisabledExample() {
 													{...defaultProps("nroExpediente")}
 												/>
 											</Grid>
-										</>}
+										) : (
+											<Alert severity="warning">Recuerde que el horario de atención para sacar citas es de Lunes a Viernes de 08:00 am - 04:30 pm.</Alert>
+										)}
 
 									<Grid item xs={12} sm={2} md={2}>
 										<Button
