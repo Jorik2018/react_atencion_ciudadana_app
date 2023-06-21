@@ -416,7 +416,7 @@ function FormDisabledExample() {
 												/>
 											</Grid>
 										) : (
-											<Alert severity="warning">Recuerde que el horario de atención para sacar citas es de Lunes a Viernes de 08:00 am - 04:30 pm.</Alert>
+											<Alert severity="warning">Recuerde que el horario de atención para sacar citas es de Lunes a Viernes de 08:00 am - 04:00 pm.</Alert>
 										)}
 
 									<Grid item xs={12} sm={2} md={2}>
