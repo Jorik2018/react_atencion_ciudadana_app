@@ -44,7 +44,6 @@ function MainDisabledExample() {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
@@ -188,23 +187,47 @@ function MainDisabledExample() {
                     </LocalizationProvider>
                 </Box>
 
-                {/* <Modal
+                <Modal
                     keepMounted
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="keep-mounted-modal-title"
                     aria-describedby="keep-mounted-modal-description"
                 >
-                    <Box sx={style}>
-                        <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-                           Bienvenido !!!
-                        </Typography>
-                        <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-                            Gobierno Regional de Áncash - Trasparencia
-                        </Typography>
-                        <Button onClick={handleClose}>Close</Button>
+                    <Box sx={{ ...style }} className='text-center'>
+                        <div style={{ maxHeight: '80vh', overflow: 'auto' }}>
+                            {/* ... (resto del contenido del modal) */}
+                            <Alert severity="warning" sx={{ mt: 1, textAlign: 'justify', fontSize: '12px', fontWeight: 'bold' }}>
+                                La atención de tickets al ciudadano se norma de acuerdo a la DIRECTIVA "NORMAS Y PROCEDIMIENTOS DE ATENCIÓN AL CIUDADANO EN EL GOBIERNO REGIONAL DE ÁNCASH" que fue aprobada con la RESOLUCIÓN GERENCIAL GENERAL REGIONAL Nº 434-2023-GRA/CGR.
+                                <br></br>
+                                <Button fullWidth size="small" className='hover-white bg-danger' variant="contained" color="success" startIcon={<PictureAsPdf />} href="https://www.regionancash.gob.pe/doc_normativas/rggr/2023/434_2023_353c72d0c4ba93279d80ac20dbc7e7dd.pdf" target={'_blank'}>
+                                    DIRECTIVA - Ver PDF
+                                </Button>
+                            </Alert>
+                            <img src={process.env.PUBLIC_URL + "/cronograma.jpg"} alt="Imagen del Gobierno Regional de Áncash" style={{ width: '100%' }} />
+
+                            <Alert severity="warning" sx={{ mt: 1, textAlign: 'justify', fontSize: '12px' }}>
+                                Horario de atención de la Mesa de Partes Presencial:
+                                <br></br>
+                                Lunes a Viernes : 8:00 am - 5:00pm
+                                <br></br>
+                                Refrigerio: 1:00pm - 2:20pm
+                            </Alert>
+                        </div>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleClose}
+                            sx={{ marginLeft: 'auto', marginTop: 2 }}
+                            size="small"
+                        >
+                            Cerrar
+                        </Button>
                     </Box>
-                </Modal> */}
+                </Modal>
+
+
+
 
             </Container>
         </Paper>
