@@ -50,7 +50,7 @@ function FormDisabledExample() {
 
 	const { width, height } = useResize(React);
 
-	const pad = (num, places) => String(num).padStart(places, '0')
+	const pad = (num, places) => String(num).padStart(places, '0');
 
 	useEffect(() => {
 		let header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
@@ -317,31 +317,35 @@ function FormDisabledExample() {
 
 	const onClickSave = async () => {
 		const form = formRef.current;
-		if (1 || form != null && validate(form)) {
-			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(async result => {
-				if (result) {
-					var p = result.id;
-					o.persona = { id: p };
-				} else {
-					await http.post(process.env.REACT_APP_PATH + '/persona', o).then((result) => {
+		if (o.fecha > formattedDate) {
+			if (1 || form != null && validate(form)) {
+				http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(async result => {
+					if (result) {
+						var p = result.id;
+						o.persona = { id: p };
+					} else {
+						await http.post(process.env.REACT_APP_PATH + '/persona', o).then((result) => {
+							if (result) {
+								o.persona = { id: result.id };
+							}
+						});
+					}
+
+					http.post(process.env.REACT_APP_PATH + '/atencion', { ...o, dependencia: { id: o.dependencia_id } }).then(async (result) => {
 						if (result) {
-							o.persona = { id: result.id };
+							dispatch({ type: "snack", msg: 'Registro grabado!' });
+							set(o => ({}));
+							navigate('/search', { replace: true });
+							if (!o._id) {
+							}
 						}
 					});
-				}
-
-				http.post(process.env.REACT_APP_PATH + '/atencion', { ...o, dependencia: { id: o.dependencia_id } }).then(async (result) => {
-					if (result) {
-						dispatch({ type: "snack", msg: 'Registro grabado!' });
-						set(o => ({}));
-						navigate('/search', { replace: true });
-						if (!o._id) {
-						}
-					}
 				});
-			});
+			} else {
+				dispatch({ type: "alert", msg: 'Falta campos por completar!' });
+			}
 		} else {
-			dispatch({ type: "alert", msg: 'Falta campos por completar!' });
+			dispatch({ type: "alert", msg: 'Recuerde que para sacar su cita debera de ser anticipada con un minimo de 24 horas.!' });
 		}
 	};
 
@@ -376,6 +380,19 @@ function FormDisabledExample() {
 		}
 	};
 
+	const [currentDate, setCurrentDate] = useState(new Date());
+
+
+	function formatDate(date: Date): string {
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, '0');
+		const day = String(date.getDate()).padStart(2, '0');
+
+		return `${year}-${month}-${day}`;
+	}
+
+	const formattedDate = formatDate(currentDate);
+
 	return (
 		<Paper className="page color-plomo" style={{ overflow: 'auto' }}>
 			<Container maxWidth="lg" >
@@ -390,7 +407,7 @@ function FormDisabledExample() {
 							<CardContent>
 								<Alert severity="warning">Recuerde que antes de registrar su cita Ud. debe de verificar en que gerencia, subgerencia y/o area se encuentra su trámite administrativo, en la consulta SISGEDO que se encuentra en el siguiente <a target={'_blank'} href="http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php"><b>LINK</b></a>, del caso contrario no será valida la cita registrada.</Alert>
 								<Typography gutterBottom variant="h5" component="div" className='text-center fw-bold color-gore mt-3'>
-									DATOS DEL EXPEDIENTE
+									DATOS DEL EXPEDIENTE {formattedDate}
 								</Typography>
 								<Grid container spacing={1}>
 
