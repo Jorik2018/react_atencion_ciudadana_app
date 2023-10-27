@@ -149,20 +149,20 @@ function FormDisabledExample() {
 							return { "Content-Type": "*/*" };
 						}).then(result => {
 							console.log(result);
-							if (result.consultarResponse.return.coResultado === "0000") {
-								let v = result.consultarResponse.return.datosPersona;
-								let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
-								set(o => ({ ...o, apellidoNombre: apename }));
-								set(o => ({ ...o, direccion: v.direccion }));
-								set((o: any) => ({ ...o, varTemp: 1 }));
-							} else {
-								set(o => ({ ...o, celular: '' }));
-								set(o => ({ ...o, email: '' }));
-								set(o => ({ ...o, apellidoNombre: '' }));
-								set(o => ({ ...o, direccion: '' }));
-								set((o: any) => ({ ...o, varTemp: 0 }));
-								dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
-							}
+							// if (result.consultarResponse.return.coResultado === "0000") {
+							// 	let v = result.consultarResponse.return.datosPersona;
+							// 	let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
+							// 	set(o => ({ ...o, apellidoNombre: apename }));
+							// 	set(o => ({ ...o, direccion: v.direccion }));
+							// 	set((o: any) => ({ ...o, varTemp: 1 }));
+							// } else {
+							set(o => ({ ...o, celular: '' }));
+							set(o => ({ ...o, email: '' }));
+							set(o => ({ ...o, apellidoNombre: '' }));
+							set(o => ({ ...o, direccion: '' }));
+							set((o: any) => ({ ...o, varTemp: 0 }));
+							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
+							// }
 						}).catch(error => {
 							console.log(error)
 						})
@@ -208,16 +208,16 @@ function FormDisabledExample() {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento1 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
 					}).then(result => {
-						if (result.consultarResponse.return.coResultado === "0000") {
-							let v = result.consultarResponse.return.datosPersona;
-							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
-							set(o => ({ ...o, apellidoNombre1: apename }));
-							set((o: any) => ({ ...o, varTemponKeyUp1: 1 }));
-						} else {
-							set(o => ({ ...o, apellidoNombre1: '' }));
-							set((o: any) => ({ ...o, varTemponKeyUp1: 0 }));
-							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
-						}
+						// if (result.consultarResponse.return.coResultado === "0000") {
+						// 	let v = result.consultarResponse.return.datosPersona;
+						// 	let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
+						// 	set(o => ({ ...o, apellidoNombre1: apename }));
+						// 	set((o: any) => ({ ...o, varTemponKeyUp1: 1 }));
+						// } else {
+						set(o => ({ ...o, apellidoNombre1: '' }));
+						set((o: any) => ({ ...o, varTemponKeyUp1: 0 }));
+						dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
+						// }
 					}).catch(error => {
 						console.log(error)
 					})
@@ -236,16 +236,16 @@ function FormDisabledExample() {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento2 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
 					}).then(result => {
-						if (result.consultarResponse.return.coResultado === "0000") {
-							let v = result.consultarResponse.return.datosPersona;
-							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
-							set(o => ({ ...o, apellidoNombre2: apename }));
-							set((o: any) => ({ ...o, varTemponKeyUp2: 1 }));
-						} else {
-							set(o => ({ ...o, apellidoNombre2: '' }));
-							set((o: any) => ({ ...o, varTemponKeyUp2: 0 }));
-							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
-						}
+						// if (result.consultarResponse.return.coResultado === "0000") {
+						// 	let v = result.consultarResponse.return.datosPersona;
+						// 	let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
+						// 	set(o => ({ ...o, apellidoNombre2: apename }));
+						// 	set((o: any) => ({ ...o, varTemponKeyUp2: 1 }));
+						// } else {
+						set(o => ({ ...o, apellidoNombre2: '' }));
+						set((o: any) => ({ ...o, varTemponKeyUp2: 0 }));
+						dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
+						// }
 					}).catch(error => {
 						console.log(error)
 					})
@@ -264,16 +264,16 @@ function FormDisabledExample() {
 					http.get('https://web.regionancash.gob.pe/api/reniec/Consultar?nuDniConsulta=' + o.nroDocumento3 + '&out=json', (h) => {
 						return { "Content-Type": "*/*" };
 					}).then(result => {
-						if (result.consultarResponse.return.coResultado === "0000") {
-							let v = result.consultarResponse.return.datosPersona;
-							let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
-							set(o => ({ ...o, apellidoNombre3: apename }));
-							set((o: any) => ({ ...o, varTemponKeyUp3: 1 }));
-						} else {
-							set(o => ({ ...o, apellidoNombre3: '' }));
-							set((o: any) => ({ ...o, varTemponKeyUp3: 0 }));
-							dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
-						}
+						// if (result.consultarResponse.return.coResultado === "0000") {
+						// 	let v = result.consultarResponse.return.datosPersona;
+						// 	let apename = v.prenombres + ' ' + v.apPrimer + ' ' + v.apSegundo;
+						// 	set(o => ({ ...o, apellidoNombre3: apename }));
+						// 	set((o: any) => ({ ...o, varTemponKeyUp3: 1 }));
+						// } else {
+						set(o => ({ ...o, apellidoNombre3: '' }));
+						set((o: any) => ({ ...o, varTemponKeyUp3: 0 }));
+						dispatch({ type: "snack", msg: 'No contamos con sus datos personales, por favor ingrese correctamente.', severity: 'warning' });
+						// }
 					}).catch(error => {
 						console.log(error)
 					})
