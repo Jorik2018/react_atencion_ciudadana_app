@@ -72,7 +72,7 @@ function FormDisabledExample() {
 
 	const isTime = () => {
 		const currentHour = currentTime.getHours();
-		return currentHour >= 8 && currentHour <= 15;
+		return currentHour >= 8 && currentHour <= 20;
 	}
 
 	const onSubmit = data => console.log(data);
